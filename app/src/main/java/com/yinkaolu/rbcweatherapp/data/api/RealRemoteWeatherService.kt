@@ -4,7 +4,7 @@ import com.yinkaolu.rbcweatherapp.data.api.model.WeatherReport
 import retrofit2.GsonConverterFactory
 import retrofit2.Retrofit
 
-class RealWeatherService : WeatherService {
+class RealRemoteWeatherService : RemoteWeatherService {
     private var weatherAPIService: WeatherAPI
     private val apiKey = "e1446afca0b722b83a6a5ffeaae20838"
 
@@ -20,7 +20,7 @@ class RealWeatherService : WeatherService {
     override suspend fun retrieveCurrentWeather(
         latitude: String,
         longitude: String
-    ): WeatherServiceResponse {
+    ): WeatherServiceResponse<WeatherReport> {
         val response = weatherAPIService.getWeatherDetails(
             latitude = latitude,
             longitude = longitude,
@@ -31,16 +31,18 @@ class RealWeatherService : WeatherService {
             if (response.isSuccessful) {
                 WeatherServiceResponse.Success(it)
             } else {
-                WeatherServiceResponse.Error
+                WeatherServiceResponse.Error("API called failed")
             }
-        } ?: WeatherServiceResponse.Error
+        } ?: WeatherServiceResponse.Error("Response was empty")
     }
 }
 
-sealed interface WeatherServiceResponse {
-    data class Success(
-        val details: WeatherReport
-    ) : WeatherServiceResponse
+sealed interface WeatherServiceResponse<S> {
+    data class Success<S>(
+        val details: S
+    ) : WeatherServiceResponse<S>
 
-    object Error: WeatherServiceResponse
+    class Error<S>(
+        val message: String
+    ): WeatherServiceResponse<S>
 }

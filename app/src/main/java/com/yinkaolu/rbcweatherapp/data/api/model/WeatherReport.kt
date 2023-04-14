@@ -15,11 +15,11 @@ data class WeatherReport(
     @SerializedName("dt")
     val requestedTime: Double? = null,
     @SerializedName("coord")
-    val coordinates: Coordinates,
+    val coordinates: Coordinates? = null,
     @SerializedName("weather")
-    val weather: List<Weather>,
+    val weather: List<Weather> = emptyList(),
     @SerializedName("main")
-    val mainWeather: MainWeather,
+    val mainWeather: MainWeather? = null,
     @SerializedName("visibility")
     val visibility: Double? = null,
     @SerializedName("wind")

@@ -16,8 +16,8 @@ class WeatherReportTest {
             assert(cityID == "3163858")
             assert(cityName == "Zocca")
 
-            assert(coordinates.latitude == 44.34)
-            assert(coordinates.longitude == 10.99)
+            assert(coordinates?.latitude == 44.34)
+            assert(coordinates?.longitude == 10.99)
 
             assert(weather.size == 1)
 
@@ -26,14 +26,14 @@ class WeatherReportTest {
             assert(weather[0].description == "moderate rain")
             assert(weather[0].icon == "10d")
 
-            assert(mainWeather.temperature == 298.48)
-            assert(mainWeather.feelsLikeTemperature == 298.74)
-            assert(mainWeather.airPressure == 1015.0)
-            assert(mainWeather.humidity == 64.0)
-            assert(mainWeather.maxTemperature == 300.05)
-            assert(mainWeather.minTemperature == 297.56)
-            assert(mainWeather.seaLevel == 1015.0)
-            assert(mainWeather.groundLevel == 933.0)
+            assert(mainWeather?.temperature == 298.48)
+            assert(mainWeather?.feelsLikeTemperature == 298.74)
+            assert(mainWeather?.airPressure == 1015.0)
+            assert(mainWeather?.humidity == 64.0)
+            assert(mainWeather?.maxTemperature == 300.05)
+            assert(mainWeather?.minTemperature == 297.56)
+            assert(mainWeather?.seaLevel == 1015.0)
+            assert(mainWeather?.groundLevel == 933.0)
 
             assert(visibility == 10000.0)
 
