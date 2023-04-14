@@ -1,12 +1,48 @@
 package com.yinkaolu.rbcweatherapp.data.api.model
 
+import android.provider.MediaStore.Video
 import com.google.gson.Gson
-import com.google.gson.JsonParser
+import com.google.gson.reflect.TypeToken
+import com.yinkaolu.rbcweatherapp.data.api.geo.GeoLocation
+import com.yinkaolu.rbcweatherapp.data.api.weather.WeatherReport
 import org.junit.Test
 
 
-class WeatherReportTest {
+class DataModelTest {
     private val gson = Gson()
+
+    @Test
+    fun geolocation_conversion() {
+        val locationListType = object : TypeToken<List<GeoLocation>>() {}.type
+
+        val parsedLocationResponse =
+            gson.fromJson<List<GeoLocation>>(SampleJSONString.FULL_GEO_LOCATION, locationListType)
+
+        parsedLocationResponse.apply {
+            assert(parsedLocationResponse.size == 5)
+
+            parsedLocationResponse[0].apply {
+                assert(name == "London")
+                assert(latitude == 51.5085)
+                assert(longitude == -0.1257)
+                assert(country == "GB")
+            }
+            parsedLocationResponse[1].apply {
+                assert(name == "London")
+                assert(latitude == 42.9834)
+                assert(longitude == -81.233)
+                assert(country == "CA")
+            }
+            parsedLocationResponse[2].apply {
+                assert(name == "London")
+                assert(latitude == 39.8865)
+                assert(longitude == -83.4483)
+                assert(country == "US")
+                assert(state == "OH")
+            }
+        }
+    }
+
     @Test
     fun fullWeather_conversion() {
         val parsedWeatherReport =

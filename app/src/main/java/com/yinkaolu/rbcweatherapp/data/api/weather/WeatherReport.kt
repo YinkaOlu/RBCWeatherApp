@@ -1,7 +1,6 @@
-package com.yinkaolu.rbcweatherapp.data.api.model
+package com.yinkaolu.rbcweatherapp.data.api.weather
 
 import com.google.gson.annotations.SerializedName
-import com.yinkaolu.rbcweatherapp.data.api.model.*
 
 /**
  * Represents the response to the Get Weather Endpoint
