@@ -11,6 +11,8 @@ data class Forcast(
     val weather: List<Weather> = emptyList(),
     @SerializedName("visibility")
     val visibility: Double? = null,
+    @SerializedName("pop")
+    val precipitationProbability: Double? = null,
     @SerializedName("wind")
     val windReport: WindReport? = null,
     @SerializedName("rain")

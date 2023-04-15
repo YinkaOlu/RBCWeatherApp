@@ -35,19 +35,19 @@ fun WeatherSummarySection(
                 .padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            AsyncImage(
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.Fit,
+                model = "https://openweathermap.org/img/wn/${weatherSummary.icon}@2x.png",
+                contentDescription = stringResource(R.string.weather_icon_description)
+            )
+
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 text = weatherSummary.dateString,
                 fontSize = MaterialTheme.typography.h5.fontSize,
                 fontStyle = MaterialTheme.typography.h5.fontStyle,
-            )
-
-            AsyncImage(
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth(),
-                model = "https://openweathermap.org/img/wn/${weatherSummary.icon}@2x.png",
-                contentDescription = stringResource(R.string.weather_icon_description)
             )
 
             Text(
@@ -58,8 +58,8 @@ fun WeatherSummarySection(
 
             Text(
                 text = weatherSummary.weatherDescription,
-                fontSize = MaterialTheme.typography.h4.fontSize,
-                fontStyle = MaterialTheme.typography.h4.fontStyle,
+                fontSize = MaterialTheme.typography.body1.fontSize,
+                fontStyle = MaterialTheme.typography.body1.fontStyle,
             )
         }
     }

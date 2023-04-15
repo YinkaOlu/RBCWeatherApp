@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -37,7 +36,9 @@ fun MainWeatherReportScreen(
     ) {
 
         item {
-            Button(onClick = { hideSearch = !hideSearch }) {
+            Button(
+                onClick = { hideSearch = !hideSearch }
+            ) {
                 Row {
                     Icon(
                         imageVector = Icons.Filled.Search,

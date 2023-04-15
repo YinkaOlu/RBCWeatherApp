@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yinkaolu.rbcweatherapp.data.OpenWeatherRepository
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.Forcast
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.Weather
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.ErrorScreen
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.*
@@ -26,8 +28,8 @@ import javax.inject.Inject
 class WeatherReportViewModel @Inject constructor(
     val openWeatherRepository: OpenWeatherRepository
 ): ViewModel() {
-    private val mainDateFormater = SimpleDateFormat("EEEE (MMM dd)")
-    private val forcastDateFormater = SimpleDateFormat("(HH:mm) MMM dd")
+    private val mainDateFormater = SimpleDateFormat("EEEE, MMM dd")
+    private val forcastDateFormater = SimpleDateFormat("EE, MMM dd (HH:mm)")
     private val _weatherReportUiState: MutableStateFlow<WeatherReportUiState> = MutableStateFlow(
         WeatherReportUiState.RequestLocationPermission
     )
@@ -162,7 +164,7 @@ class WeatherReportViewModel @Inject constructor(
 
     private fun WeatherReport.toWeatherSummary() = WeatherSummary(
         icon = weather.firstOrNull()?.icon ?: "",
-        weatherDescription = weather.map { it.description }.joinToString ("\n" ),
+        weatherDescription = toDisplayDescription(),
         temperature = convertKelvinToCelsius(mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
         dateString = this.atTime?.let {
             val date = Date(it.toLong() * 1000)
@@ -171,12 +173,12 @@ class WeatherReportViewModel @Inject constructor(
     )
 
     private fun ForcastReport.toForcastSummary() = ForcastSummary(
-        weatherSummaries = list.map {forcast ->
+        weatherSummaries = list.map { forecast ->
             WeatherSummary(
-                icon = forcast.weather.firstOrNull()?.icon.orEmpty(),
-                weatherDescription = forcast.weather.map { it.description }.joinToString ("\n" ),
-                temperature = convertKelvinToCelsius(forcast.mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
-                dateString = forcast.time?.let {
+                icon = forecast.weather.firstOrNull()?.icon.orEmpty(),
+                weatherDescription = forecast.toDisplayDescription(),
+                temperature = convertKelvinToCelsius(forecast.mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
+                dateString = forecast.time?.let {
                     val date = Date(it.toLong() * 1000)
                     forcastDateFormater.format(date)
                 }.orEmpty()
@@ -186,8 +188,83 @@ class WeatherReportViewModel @Inject constructor(
 
     private fun convertKelvinToCelsius(kelvin: Double?): Double? =
         kelvin?.let {
-            BigDecimal(it.minus(273.15)).setScale(2, RoundingMode.CEILING).toDouble()
+            BigDecimal(it.minus(kelvinToCelsiusDif)).setScale(2, RoundingMode.CEILING).toDouble()
         }
 
     private fun Double.toCelsiusString(): String = "$this°C"
+
+    private fun Forcast.toDisplayDescription(): String {
+        var report = "* "
+        report += weather
+            .map { it.description }.joinToString ("\n" )
+
+        report += "\n\n"
+
+        mainWeather?.let {
+            report += "* Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
+            report += "* Humidity: ${it.humidity}%\n\n"
+        }
+
+        report += "* Cloud Visibility: ${visibility}\n\n"
+        cloudReport?.let {
+            report += "* Cloud Coverage: ${it.coverage}% \n\n"
+        }
+
+        report += "* Precipitation: ${precipitationProbability}%\n\n"
+        rainReport?.let {
+            report += "* Rain over an Hour: ${it.rainOverLastHour} m\n\n"
+            report += "* Rain over 3 Hours: ${it.rainOverLastThreeHour} m\n\n"
+        }
+
+        snowReport?.let {
+            report += "* Snow over an Hour: ${it.snowOverLastHour}\n\n"
+            report += "* Snow over 3 Hours: ${it.snowOverLastThreeHour}\n\n"
+        }
+
+        windReport?.let {
+            report += "* Wind Speed: ${it.windSpeed} m/s \n\n"
+            report += "* Wind Direction: ${it.windDirectionDegree}°\n\n"
+        }
+
+        return report
+    }
+
+    private fun WeatherReport.toDisplayDescription(): String {
+        var report = "* "
+        report += weather
+            .map { it.description }.joinToString ("\n" )
+
+        report += "\n\n"
+
+        mainWeather?.let {
+            report += "* Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
+            report += "* Humidity: ${it.humidity}%\n\n"
+        }
+
+        report += "* Cloud Visibility: ${visibility}\n\n"
+        cloudReport?.let {
+            report += "* Cloud Coverage: ${it.coverage}%\n\n"
+        }
+
+        rainReport?.let {
+            report += "* Rain over an Hour: ${it.rainOverLastHour}\n\n"
+            report += "* Rain over 3 Hours: ${it.rainOverLastThreeHour}\n\n"
+        }
+
+        snowReport?.let {
+            report += "* Snow over an Hour: ${it.snowOverLastHour}\n\n"
+            report += "* Snow over 3 Hours: ${it.snowOverLastThreeHour}\n\n"
+        }
+
+        windReport?.let {
+            report += "* Wind Speed: ${it.windSpeed} m/s \n\n"
+            report += "* Wind Direction: ${it.windDirectionDegree}°\n\n"
+        }
+
+        return report
+    }
+
+    companion object {
+        private const val kelvinToCelsiusDif = 273.15
+    }
 }

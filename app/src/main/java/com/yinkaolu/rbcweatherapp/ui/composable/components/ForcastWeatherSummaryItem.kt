@@ -28,18 +28,17 @@ fun ForcastWeatherSummaryItem(
                 .padding(32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            AsyncImage(
+                modifier = Modifier.fillMaxWidth(),
+                contentScale = ContentScale.Fit,
+                model = "https://openweathermap.org/img/wn/${weatherSummary.icon}@2x.png",
+                contentDescription = "Weather Icon"
+            )
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = weatherSummary.dateString,
                 fontSize = MaterialTheme.typography.h5.fontSize,
                 fontStyle = MaterialTheme.typography.h5.fontStyle,
-            )
-
-            AsyncImage(
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxWidth(),
-                model = "https://openweathermap.org/img/wn/${weatherSummary.icon}@2x.png",
-                contentDescription = "Weather Icon"
             )
 
             Text(
@@ -52,8 +51,8 @@ fun ForcastWeatherSummaryItem(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = weatherSummary.weatherDescription,
-                fontSize = MaterialTheme.typography.h5.fontSize,
-                fontStyle = MaterialTheme.typography.h5.fontStyle,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize,
+                fontStyle = MaterialTheme.typography.subtitle1.fontStyle,
             )
         }
     }
