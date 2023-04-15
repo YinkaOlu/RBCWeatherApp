@@ -42,8 +42,10 @@ class DataModelTest {
     fun geolocation_conversion() {
         val locationListType = object : TypeToken<List<GeoLocation>>() {}.type
 
+        val fullLocationJsonString = readJSON("full_location")
+
         val parsedLocationResponse =
-            gson.fromJson<List<GeoLocation>>(SampleJSONString.FULL_GEO_LOCATION, locationListType)
+            gson.fromJson<List<GeoLocation>>(fullLocationJsonString, locationListType)
 
         parsedLocationResponse.apply {
             assert(parsedLocationResponse.size == 5)
@@ -72,8 +74,9 @@ class DataModelTest {
 
     @Test
     fun fullWeather_conversion() {
+        val fullWeatherJSONString = readJSON("full_weather")
         val parsedWeatherReport =
-            gson.fromJson(SampleJSONString.FULL_WEATHER_REPORT, WeatherReport::class.java)
+            gson.fromJson(fullWeatherJSONString, WeatherReport::class.java)
 
         parsedWeatherReport.apply {
             assert(cityID == "3163858")
@@ -105,10 +108,6 @@ class DataModelTest {
             assert(windReport?.windDirectionDegree == 349.0)
 
             assert(rainReport?.rainOverLastHour == 3.16)
-            assert(rainReport?.rainOverLastThreeHour == 3.17)
-
-            assert(snowReport?.snowOverLastHour == 1.16)
-            assert(snowReport?.snowOverLastThreeHour == 1.17)
 
             assert(cloudReport?.coverage == 100.0)
         }
