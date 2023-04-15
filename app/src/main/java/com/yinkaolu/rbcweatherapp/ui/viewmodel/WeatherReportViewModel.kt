@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
 import com.yinkaolu.rbcweatherapp.domain.*
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.*
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate.WeatherReportUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +22,7 @@ class WeatherReportViewModel @Inject constructor(
     val loadWeatherReportUseCase: LoadWeatherReportUseCase,
     val loadGeoLocationByCoordinatesUseCase: LoadGeoLocationByCoordinatesUseCase,
     val loadWeatherReportByCoordinatesUseCase: LoadWeatherReportByCoordinatesUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _weatherReportUiState: MutableStateFlow<WeatherReportUiState> = MutableStateFlow(
         WeatherReportUiState.RequestCurrentLocation
     )
@@ -39,6 +39,7 @@ class WeatherReportViewModel @Inject constructor(
             )
         }
     }
+
     fun setCurrentLocation(
         lat: Double,
         lon: Double,
@@ -66,11 +67,12 @@ class WeatherReportViewModel @Inject constructor(
                         )
                     )
                 )
-            }  catch (e: java.lang.Exception) {
+            } catch (e: java.lang.Exception) {
                 _weatherReportUiState.emit(
                     WeatherReportUiState.Error(
                         message = e.message ?: "Unknown error occurred. Try again!"
-                    ))
+                    )
+                )
             }
         }
     }
@@ -110,8 +112,9 @@ class WeatherReportViewModel @Inject constructor(
             } catch (e: java.lang.Exception) {
                 _weatherReportUiState.emit(
                     WeatherReportUiState.Error(
-                    message = e.message ?: "Unknown error occurred. Try again!"
-                ))
+                        message = e.message ?: "Unknown error occurred. Try again!"
+                    )
+                )
             }
         }
     }
@@ -131,8 +134,9 @@ class WeatherReportViewModel @Inject constructor(
             } catch (e: java.lang.Exception) {
                 _weatherReportUiState.emit(
                     WeatherReportUiState.Error(
-                    message = e.message ?: "Unknown error occurred. Try again!"
-                ))
+                        message = e.message ?: "Unknown error occurred. Try again!"
+                    )
+                )
             }
         }
     }

@@ -13,7 +13,7 @@ class LoadForecastReportUseCase @Inject constructor(
 ) {
     suspend fun invoke(
         lastGeoLocation: GeoLocation
-    ) : SummarizedForecast = withContext(dispatcher) {
+    ): SummarizedForecast = withContext(dispatcher) {
         val forecastReport = openWeatherRepository.loadForecastReport(
             longitude = "${lastGeoLocation.longitude}",
             latitude = "${lastGeoLocation.latitude}"

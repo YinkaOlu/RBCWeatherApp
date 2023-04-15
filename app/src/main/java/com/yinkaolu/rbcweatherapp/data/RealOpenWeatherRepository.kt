@@ -1,8 +1,8 @@
 package com.yinkaolu.rbcweatherapp.data
 
 import android.accounts.NetworkErrorException
-import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherResponse
+import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
@@ -17,7 +17,7 @@ class RealOpenWeatherRepository @Inject constructor(
             longitude = longitude
         )
 
-        return when(loadCurrentWeatherReportResponse) {
+        return when (loadCurrentWeatherReportResponse) {
             is OpenWeatherResponse.Success<ForecastReport> -> {
                 loadCurrentWeatherReportResponse.details
             }
@@ -37,7 +37,7 @@ class RealOpenWeatherRepository @Inject constructor(
             longitude = longitude
         )
 
-        return when(loadCurrentWeatherReportResponse) {
+        return when (loadCurrentWeatherReportResponse) {
             is OpenWeatherResponse.Success<WeatherReport> -> {
                 loadCurrentWeatherReportResponse.details
             }
@@ -60,12 +60,12 @@ class RealOpenWeatherRepository @Inject constructor(
             country = country
         )
 
-        return when(foundLocationResponse) {
+        return when (foundLocationResponse) {
             is OpenWeatherResponse.Success<GeoLocationList> -> {
                 foundLocationResponse.details
             }
             is OpenWeatherResponse.Error -> {
-                when(foundLocationResponse.type) {
+                when (foundLocationResponse.type) {
                     OpenWeatherResponse.Error.ErrorType.NETWORK_ERROR ->
                         throw NetworkErrorException("Network error")
                     OpenWeatherResponse.Error.ErrorType.EMPTY_RESPONSE ->
@@ -84,12 +84,12 @@ class RealOpenWeatherRepository @Inject constructor(
             longitude = longitude
         )
 
-        return when(foundLocationResponse) {
+        return when (foundLocationResponse) {
             is OpenWeatherResponse.Success<GeoLocationList> -> {
                 foundLocationResponse.details
             }
             is OpenWeatherResponse.Error -> {
-                when(foundLocationResponse.type) {
+                when (foundLocationResponse.type) {
                     OpenWeatherResponse.Error.ErrorType.NETWORK_ERROR ->
                         throw NetworkErrorException("Network error")
                     OpenWeatherResponse.Error.ErrorType.EMPTY_RESPONSE ->

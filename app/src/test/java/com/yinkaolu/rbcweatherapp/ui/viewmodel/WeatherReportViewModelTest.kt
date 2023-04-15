@@ -44,11 +44,26 @@ class WeatherReportViewModelTest {
     @Before
     fun setup() {
         weatherReportViewModel = WeatherReportViewModel(
-            loadGeoLocationUseCase = LoadGeoLocationUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
-            loadForecastReportUseCase = LoadForecastReportUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
-            loadGeoLocationByCoordinatesUseCase = LoadGeoLocationByCoordinatesUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
-            loadWeatherReportUseCase = LoadWeatherReportUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
-            loadWeatherReportByCoordinatesUseCase = LoadWeatherReportByCoordinatesUseCase(UnconfinedTestDispatcher(), openWeatherRepository)
+            loadGeoLocationUseCase = LoadGeoLocationUseCase(
+                UnconfinedTestDispatcher(),
+                openWeatherRepository
+            ),
+            loadForecastReportUseCase = LoadForecastReportUseCase(
+                UnconfinedTestDispatcher(),
+                openWeatherRepository
+            ),
+            loadGeoLocationByCoordinatesUseCase = LoadGeoLocationByCoordinatesUseCase(
+                UnconfinedTestDispatcher(),
+                openWeatherRepository
+            ),
+            loadWeatherReportUseCase = LoadWeatherReportUseCase(
+                UnconfinedTestDispatcher(),
+                openWeatherRepository
+            ),
+            loadWeatherReportByCoordinatesUseCase = LoadWeatherReportByCoordinatesUseCase(
+                UnconfinedTestDispatcher(),
+                openWeatherRepository
+            )
         )
     }
 

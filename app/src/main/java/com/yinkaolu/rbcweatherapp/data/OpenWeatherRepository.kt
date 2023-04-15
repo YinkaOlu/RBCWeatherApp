@@ -9,23 +9,24 @@ interface OpenWeatherRepository {
     suspend fun loadForecastReport(
         latitude: String,
         longitude: String
-    ) : ForecastReport
+    ): ForecastReport
+
     @Throws(Exception::class)
     suspend fun loadCurrentWeatherReport(
         latitude: String,
         longitude: String
-    ) : WeatherReport
+    ): WeatherReport
 
     @Throws(Exception::class)
     suspend fun findLocation(
         city: String,
         state: String? = null,
         country: String? = null
-    ) : GeoLocationList
+    ): GeoLocationList
 
     @Throws(Exception::class)
     suspend fun findLocationByCoordinates(
         longitude: String,
         latitude: String,
-    ) : GeoLocationList
+    ): GeoLocationList
 }

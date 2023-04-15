@@ -17,8 +17,8 @@ import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationEntry
 import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationSummarySection
 import com.yinkaolu.rbcweatherapp.ui.composable.components.WeatherSummarySection
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 
 @Composable
@@ -45,11 +45,13 @@ fun MainWeatherReportScreen(
                         contentDescription = stringResource(R.string.search_icon_description)
                     )
 
-                    Text(if(hideSearch) {
-                        stringResource(R.string.open_location_button_hint)
-                    } else {
-                        stringResource(R.string.close_location_button_hint)
-                    })
+                    Text(
+                        if (hideSearch) {
+                            stringResource(R.string.open_location_button_hint)
+                        } else {
+                            stringResource(R.string.close_location_button_hint)
+                        }
+                    )
                 }
             }
         }

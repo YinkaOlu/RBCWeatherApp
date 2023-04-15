@@ -1,7 +1,7 @@
 package com.yinkaolu.rbcweatherapp.data
 
-import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherResponse
+import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import kotlinx.coroutines.test.runTest
@@ -22,8 +22,9 @@ class RealOpenWeatherRepositoryTest {
 
     @Test
     fun findGeoLocations_successResponse() = runTest {
-        `when`(openWeatherService
-            .findGeoLocations(anyString(), eq(null), eq(null))
+        `when`(
+            openWeatherService
+                .findGeoLocations(anyString(), eq(null), eq(null))
         ).thenReturn(
             OpenWeatherResponse.Success(
                 details = listOf(
@@ -43,8 +44,9 @@ class RealOpenWeatherRepositoryTest {
 
     @Test(expected = java.lang.Exception::class)
     fun findGeoLocations_errorResponse() = runTest {
-        `when`(openWeatherService
-            .findGeoLocations(anyString(), anyString(), anyString())
+        `when`(
+            openWeatherService
+                .findGeoLocations(anyString(), anyString(), anyString())
         ).thenReturn(
             OpenWeatherResponse.Error(OpenWeatherResponse.Error.ErrorType.NETWORK_ERROR)
         )

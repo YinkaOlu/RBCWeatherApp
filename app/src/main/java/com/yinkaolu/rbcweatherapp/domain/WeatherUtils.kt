@@ -38,7 +38,8 @@ fun ForecastReport.toForecastSummary() = ForecastSummary(
         WeatherSummary(
             icon = forecast.weather.firstOrNull()?.icon.orEmpty(),
             weatherDescription = forecast.toFullDescription(),
-            temperature = convertKelvinToCelsius(forecast.mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
+            temperature = convertKelvinToCelsius(forecast.mainWeather?.temperature)?.toCelsiusString()
+                ?: "unknown",
             dateString = forecast.time?.let {
                 val date = Date(it.toLong() * 1000)
                 forcastDateFormater.format(date)
@@ -57,7 +58,7 @@ fun Double.toCelsiusString(): String = "$this°C"
 fun Forcast.toFullDescription(): String {
     var report = "- "
     report += weather
-        .map { it.description }.joinToString ("\n" )
+        .map { it.description }.joinToString("\n")
 
     report += "\n\n"
 
@@ -93,7 +94,7 @@ fun Forcast.toFullDescription(): String {
 fun WeatherReport.toQuickDescription(): String {
     var report = "- "
     report += weather
-        .map { it.description }.joinToString (" / " )
+        .map { it.description }.joinToString(" / ")
 
     report += "\n\n"
 

@@ -1,7 +1,6 @@
 package com.yinkaolu.rbcweatherapp.domain
 
 import com.yinkaolu.rbcweatherapp.data.OpenWeatherRepository
-import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +15,7 @@ class LoadWeatherReportByCoordinatesUseCase @Inject constructor(
     suspend fun invoke(
         latitude: Double,
         longitude: Double
-    ) : WeatherReport = withContext(dispatcher) {
+    ): WeatherReport = withContext(dispatcher) {
         openWeatherRepository.loadCurrentWeatherReport(
             longitude = "$longitude",
             latitude = "$latitude"

@@ -8,11 +8,11 @@ import com.yinkaolu.rbcweatherapp.domain.SummarizedWeatherReport
  */
 sealed interface WeatherReportUiState {
 
-    object RequestCurrentLocation: WeatherReportUiState
+    object RequestCurrentLocation : WeatherReportUiState
 
     data class Error(
         val message: String
-    ): WeatherReportUiState
+    ) : WeatherReportUiState
 
     data class MainWeatherPage(
         val summarizedWeatherReport: SummarizedWeatherReport
@@ -22,5 +22,5 @@ sealed interface WeatherReportUiState {
         val summarizedForecast: SummarizedForecast
     ) : WeatherReportUiState
 
-    object Loading: WeatherReportUiState
+    object Loading : WeatherReportUiState
 }

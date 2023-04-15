@@ -2,7 +2,6 @@ package com.yinkaolu.rbcweatherapp.domain
 
 import com.yinkaolu.rbcweatherapp.data.OpenWeatherRepository
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,7 +15,7 @@ class LoadGeoLocationByCoordinatesUseCase @Inject constructor(
     suspend fun invoke(
         lat: Double,
         lon: Double,
-    ): GeoLocation = withContext(dispatcher){
+    ): GeoLocation = withContext(dispatcher) {
         val locations = openWeatherRepository.findLocationByCoordinates(
             longitude = "$lon",
             latitude = "$lat"

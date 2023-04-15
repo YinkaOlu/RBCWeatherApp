@@ -1,10 +1,9 @@
 package com.yinkaolu.rbcweatherapp
 
-import com.google.android.gms.location.LocationCallback
-import android.os.Bundle
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
+import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -16,11 +15,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.location.*
+import com.yinkaolu.rbcweatherapp.ui.composable.WeatherReportScreen
 import com.yinkaolu.rbcweatherapp.ui.theme.RBCWeatherAppTheme
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.WeatherReportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.yinkaolu.rbcweatherapp.ui.composable.WeatherReportScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -92,7 +91,8 @@ class MainActivity : ComponentActivity() {
     private fun retrieveLastKnownLocation() {
         val hasLocationPermission = checkCallingOrSelfPermission(ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED && checkCallingOrSelfPermission(
-            ACCESS_FINE_LOCATION) ==
+            ACCESS_FINE_LOCATION
+        ) ==
                 PackageManager.PERMISSION_GRANTED
 
         if (hasLocationPermission) {

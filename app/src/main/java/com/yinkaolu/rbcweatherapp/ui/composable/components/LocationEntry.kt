@@ -32,7 +32,7 @@ fun LocationEntry(
         TextField(
             modifier = Modifier.fillMaxWidth(),
             label = {
-                    Text(stringResource(R.string.city_hint))
+                Text(stringResource(R.string.city_hint))
             },
             value = cityText,
             onValueChange = { cityText = it }
@@ -59,14 +59,14 @@ fun LocationEntry(
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-            onSearchLocation(
-                UserLocationSearchInput(
-                    cityName = cityText,
-                    state = stateText,
-                    country = countryText
+                onSearchLocation(
+                    UserLocationSearchInput(
+                        cityName = cityText,
+                        state = stateText,
+                        country = countryText
+                    )
                 )
-            )
-        }) {
+            }) {
             Text(text = stringResource(R.string.search_button_text))
         }
 

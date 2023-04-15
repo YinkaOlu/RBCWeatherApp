@@ -21,8 +21,7 @@ fun LoadingScreen() {
     ) {
         Text(text = "Loading")
         CircularProgressIndicator(
-            modifier = Modifier.
-                    size(48.dp)
+            modifier = Modifier.size(48.dp)
         )
     }
 }

@@ -88,7 +88,10 @@ class RealOpenWeatherService @Inject constructor() : OpenWeatherService {
         } ?: OpenWeatherResponse.Error(OpenWeatherResponse.Error.ErrorType.EMPTY_RESPONSE)
     }
 
-    override suspend fun findGeoLocationsByCoordinate(latitude: String, longitude: String): OpenWeatherResponse<GeoLocationList> {
+    override suspend fun findGeoLocationsByCoordinate(
+        latitude: String,
+        longitude: String
+    ): OpenWeatherResponse<GeoLocationList> {
         val geoLocationResponse = openWeatherAPIService.findLocationCoordinates(
             lat = latitude,
             lon = longitude,
@@ -112,7 +115,7 @@ sealed interface OpenWeatherResponse<S> {
 
     class Error<S>(
         val type: ErrorType
-    ): OpenWeatherResponse<S> {
+    ) : OpenWeatherResponse<S> {
         enum class ErrorType {
             NETWORK_ERROR,
             EMPTY_RESPONSE
