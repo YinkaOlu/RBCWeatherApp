@@ -8,6 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Use case that represents the loading of up to date Geolocation Information
+ * for either a search location or a previous geolocation.
+ */
 class LoadGeoLocationUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default,
     val openWeatherRepository: OpenWeatherRepository

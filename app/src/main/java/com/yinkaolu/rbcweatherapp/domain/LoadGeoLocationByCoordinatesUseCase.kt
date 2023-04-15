@@ -7,6 +7,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Use case that represents the loading of Geolocation Information
+ * for a give coordinates (latitude & longitude).
+ * Returns full Geolocation data for the first (most likely) match
+ */
 class LoadGeoLocationByCoordinatesUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default,
     val openWeatherRepository: OpenWeatherRepository

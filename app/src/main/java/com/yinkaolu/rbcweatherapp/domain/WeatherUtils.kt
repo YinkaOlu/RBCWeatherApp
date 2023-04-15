@@ -12,24 +12,27 @@ import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
 
-private val mainDateFormater = SimpleDateFormat("EEEE, MMM dd")
-private val forcastDateFormater = SimpleDateFormat("MMM dd (HH:mm)")
+private val mainDateFormatter by lazy { SimpleDateFormat("EEEE, MMM dd", Locale.getDefault()) }
+private val forecastDateFormatter by lazy { SimpleDateFormat("MMM dd (HH:mm)", Locale.getDefault()) }
+
+private const val UNKNWON_CITY_FALLBACK = "unknown"
+private const val UNKNOWN_TEMPERATURE_FALLBACK = "unknown"
 
 fun GeoLocation?.toLocationSummary() = this?.let {
     LocationSummary(
-        cityName = it.name ?: "unknown",
+        cityName = it.name ?: UNKNWON_CITY_FALLBACK,
         stateName = it.state,
         countryName = it.country
     )
 }
 
 fun WeatherReport.toWeatherSummary() = WeatherSummary(
-    icon = weather.firstOrNull()?.icon ?: "",
+    icon = weather.firstOrNull()?.icon.orEmpty(),
     weatherDescription = toQuickDescription(),
-    temperature = convertKelvinToCelsius(mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
+    temperature = convertKelvinToCelsius(mainWeather?.temperature)?.toCelsiusString() ?: UNKNOWN_TEMPERATURE_FALLBACK,
     dateString = this.atTime?.let {
         val date = Date(it.toLong() * 1000)
-        mainDateFormater.format(date)
+        mainDateFormatter.format(date)
     }.orEmpty()
 )
 
@@ -39,10 +42,10 @@ fun ForecastReport.toForecastSummary() = ForecastSummary(
             icon = forecast.weather.firstOrNull()?.icon.orEmpty(),
             weatherDescription = forecast.toFullDescription(),
             temperature = convertKelvinToCelsius(forecast.mainWeather?.temperature)?.toCelsiusString()
-                ?: "unknown",
+                ?: UNKNWON_CITY_FALLBACK,
             dateString = forecast.time?.let {
                 val date = Date(it.toLong() * 1000)
-                forcastDateFormater.format(date)
+                forecastDateFormatter.format(date)
             }.orEmpty()
         )
     }

@@ -4,6 +4,10 @@ import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 
+/**
+ * Represents the main gateway to OpenWeather data.
+ * Abstracts away the need to know and manage the data source
+ */
 interface OpenWeatherRepository {
     @Throws(Exception::class)
     suspend fun loadForecastReport(

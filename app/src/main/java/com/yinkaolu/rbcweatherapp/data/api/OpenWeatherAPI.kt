@@ -7,6 +7,10 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Represents the OpenWeather endpoints that can be called
+ */
+
 interface OpenWeatherAPI {
     @GET("data/2.5/forecast")
     fun getForcast(

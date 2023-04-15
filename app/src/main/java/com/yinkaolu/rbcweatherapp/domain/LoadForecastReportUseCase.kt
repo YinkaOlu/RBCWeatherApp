@@ -7,6 +7,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * Use case that represents the loading of Forecast Information for a give GeoLocation.
+ * Converts raw Forecast report to a summarized version to be displayed
+ */
 class LoadForecastReportUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher = Dispatchers.Default,
     val openWeatherRepository: OpenWeatherRepository

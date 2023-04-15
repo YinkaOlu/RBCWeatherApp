@@ -4,6 +4,10 @@ import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 
+/**
+ * Represents an abstractions of the [OpenWeatherAPI].
+ * Simpler to interact with compared to use the direct API
+ */
 interface OpenWeatherService {
     suspend fun retrieveForcast(
         latitude: String,
