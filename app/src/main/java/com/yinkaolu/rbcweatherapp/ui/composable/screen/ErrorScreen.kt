@@ -8,16 +8,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.composable.LocationEntry
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.LocationInfo
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
 
 @Composable
 fun ErrorScreen(
+    errorMessage: String?,
     onSearchLocation: (locationInfo: LocationInfo) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(text = stringResource(R.string.error_message_title))
+        Text(text = errorMessage ?: stringResource(R.string.error_message_title))
         LocationEntry(
             onSearchLocation = onSearchLocation
         )

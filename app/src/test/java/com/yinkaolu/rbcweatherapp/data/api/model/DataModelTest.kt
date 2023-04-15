@@ -1,15 +1,42 @@
 package com.yinkaolu.rbcweatherapp.data.api.model
 
-import android.provider.MediaStore.Video
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.yinkaolu.rbcweatherapp.data.api.geo.GeoLocation
-import com.yinkaolu.rbcweatherapp.data.api.weather.WeatherReport
+import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import org.junit.Test
+import java.io.BufferedReader
+import java.io.FileReader
 
 
 class DataModelTest {
     private val gson = Gson()
+
+    private fun readJSON(fileName: String): String {
+        val forcastFile = javaClass.classLoader?.getResource("$fileName.json")?.file
+
+        val fileReader = FileReader(forcastFile)
+        val bufferedReader = BufferedReader(fileReader)
+        val stringBuilder = StringBuilder()
+        var line = bufferedReader.readLine()
+        while (line != null) {
+            stringBuilder.append(line).append("\n")
+            line = bufferedReader.readLine()
+        }
+        bufferedReader.close()
+        return stringBuilder.toString()
+    }
+
+    @Test
+    fun forcast_conversion() {
+        val forcastReportString = readJSON("sample_forcast")
+        val parsedForcastReport = gson.fromJson(forcastReportString, ForcastReport::class.java)
+
+        parsedForcastReport.apply {
+            assert(true)
+        }
+    }
 
     @Test
     fun geolocation_conversion() {

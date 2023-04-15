@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.data.api.geo
+package com.yinkaolu.rbcweatherapp.data.api.model.geo
 
 import com.google.gson.annotations.SerializedName
 

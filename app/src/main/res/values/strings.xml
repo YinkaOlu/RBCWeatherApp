@@ -7,4 +7,10 @@
     <string name="weather_report_titile">Weather Report</string>
     <string name="fallback_city_name">unknown</string>
     <string name="error_message_title">Error Message</string>
+    <string name="weather_icon_description">Weather Icon</string>
+    <string name="search_icon_description">Search for location</string>
+    <string name="open_location_button_hint">Open Location Search</string>
+    <string name="close_location_button_hint">Close Location Search</string>
+    <string name="location_permission_rationale">Location permissions are necessary to determine the weather at your exact location.</string>
+    <string name="request_location_permission">Request location permission</string>
 </resources>

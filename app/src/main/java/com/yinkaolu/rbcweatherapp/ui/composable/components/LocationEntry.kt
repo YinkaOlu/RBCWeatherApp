@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.yinkaolu.rbcweatherapp.R
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.LocationInfo
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
 
 @Composable
 fun LocationEntry(

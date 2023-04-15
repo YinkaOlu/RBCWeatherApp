@@ -1,9 +1,15 @@
 package com.yinkaolu.rbcweatherapp.data
 
-import com.yinkaolu.rbcweatherapp.data.api.geo.GeoLocationList
-import com.yinkaolu.rbcweatherapp.data.api.weather.WeatherReport
+import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 
 interface OpenWeatherRepository {
+    @Throws(Exception::class)
+    suspend fun loadForcastReport(
+        latitude: String,
+        longitude: String
+    ) : ForcastReport
     @Throws(Exception::class)
     suspend fun loadCurrentWeatherReport(
         latitude: String,
@@ -15,5 +21,11 @@ interface OpenWeatherRepository {
         city: String,
         state: String? = null,
         country: String? = null
+    ) : GeoLocationList
+
+    @Throws(Exception::class)
+    suspend fun findLocationByCoordinates(
+        longitude: String,
+        latitude: String,
     ) : GeoLocationList
 }

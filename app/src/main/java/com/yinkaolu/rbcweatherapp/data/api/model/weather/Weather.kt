@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.data.api.weather
+package com.yinkaolu.rbcweatherapp.data.api.model.weather
 
 data class Weather(
     val id: String? = null,

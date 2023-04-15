@@ -2,8 +2,8 @@ package com.yinkaolu.rbcweatherapp.data
 
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherResponse
-import com.yinkaolu.rbcweatherapp.data.api.geo.GeoLocation
-import com.yinkaolu.rbcweatherapp.data.api.weather.WeatherReport
+import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -46,7 +46,7 @@ class RealOpenWeatherRepositoryTest {
         `when`(openWeatherService
             .findGeoLocations(anyString(), anyString(), anyString())
         ).thenReturn(
-            OpenWeatherResponse.Error("Network error")
+            OpenWeatherResponse.Error(OpenWeatherResponse.Error.ErrorType.NETWORK_ERROR)
         )
 
         val locationList =
@@ -71,7 +71,7 @@ class RealOpenWeatherRepositoryTest {
     @Test(expected = java.lang.Exception::class)
     fun loadCurrentWeather_networkErrorResponse() = runTest {
         `when`(openWeatherService.retrieveCurrentWeather(anyString(), anyString())).thenReturn(
-            OpenWeatherResponse.Error("Network error")
+            OpenWeatherResponse.Error(OpenWeatherResponse.Error.ErrorType.NETWORK_ERROR)
         )
         openWeatherRepository.loadCurrentWeatherReport("", "")
     }

@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.data.api.weather
+package com.yinkaolu.rbcweatherapp.data.api.model.weather
 
 import com.google.gson.annotations.SerializedName
 
@@ -12,7 +12,7 @@ data class WeatherReport(
     @SerializedName("name")
     val cityName: String? = null,
     @SerializedName("dt")
-    val requestedTime: Double? = null,
+    val atTime: Double? = null,
     @SerializedName("coord")
     val coordinates: Coordinates? = null,
     @SerializedName("weather")
