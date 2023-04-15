@@ -10,6 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * UI component that renders the loading screen
+ */
 @Composable
 fun LoadingScreen() {
     Column(

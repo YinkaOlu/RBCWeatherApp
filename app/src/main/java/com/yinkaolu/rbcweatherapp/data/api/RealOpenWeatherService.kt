@@ -1,7 +1,7 @@
 package com.yinkaolu.rbcweatherapp.data.api
 
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import retrofit2.GsonConverterFactory
 import retrofit2.Retrofit
@@ -23,7 +23,7 @@ class RealOpenWeatherService @Inject constructor() : OpenWeatherService {
     override suspend fun retrieveForcast(
         latitude: String,
         longitude: String
-    ): OpenWeatherResponse<ForcastReport> {
+    ): OpenWeatherResponse<ForecastReport> {
         val response = openWeatherAPIService.getForcast(
             latitude = latitude,
             longitude = longitude,

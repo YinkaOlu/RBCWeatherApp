@@ -1,17 +1,14 @@
-package com.yinkaolu.rbcweatherapp.ui
+package com.yinkaolu.rbcweatherapp.ui.composable
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.*
 import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.ErrorScreen
-import com.yinkaolu.rbcweatherapp.ui.composable.screen.ForcastDetailScreen
+import com.yinkaolu.rbcweatherapp.ui.composable.screen.ForecastDetailScreen
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.LoadingScreen
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.MainWeatherReportScreen
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
@@ -38,8 +35,8 @@ fun WeatherReportScreen(
             onSearchLocation = onSearchLocation,
             onViewMore = onPresentForecastDetails
         )
-        is WeatherReportUiState.ForcastDetailPage -> ForcastDetailScreen(
-            forcastSummary = state.forcastSummary,
+        is WeatherReportUiState.ForcastDetailPage -> ForecastDetailScreen(
+            forecastSummary = state.forecastSummary,
             locationSummary = state.locationSummary,
             onBack = onReturnToMain
         )

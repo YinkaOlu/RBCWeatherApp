@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.ui.composable
+package com.yinkaolu.rbcweatherapp.ui.composable.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +14,11 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 
+/**
+ * UI representing the Forecast items on the Forecast detail page
+ */
 @Composable
-fun ForcastWeatherSummaryItem(
+fun ForecastWeatherSummaryItem(
     weatherSummary: WeatherSummary
 ) {
     Card(

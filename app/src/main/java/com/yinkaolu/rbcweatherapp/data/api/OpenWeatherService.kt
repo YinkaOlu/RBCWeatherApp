@@ -1,14 +1,14 @@
 package com.yinkaolu.rbcweatherapp.data.api
 
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 
 interface OpenWeatherService {
     suspend fun retrieveForcast(
         latitude: String,
         longitude: String
-    ): OpenWeatherResponse<ForcastReport>
+    ): OpenWeatherResponse<ForecastReport>
 
     suspend fun retrieveCurrentWeather(
         latitude: String,

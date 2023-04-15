@@ -2,6 +2,9 @@ package com.yinkaolu.rbcweatherapp.data.api.model.weather
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * API model representing the Forecast data return for future weather information
+ */
 data class Forcast(
     @SerializedName("dt")
     val time: Double? = null,

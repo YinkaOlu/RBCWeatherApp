@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.ui.composable
+package com.yinkaolu.rbcweatherapp.ui.composable.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,6 +19,9 @@ import coil.compose.AsyncImage
 import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 
+/**
+ * UI component that renders the summarized weather details on main screen
+ */
 @Composable
 fun WeatherSummarySection(
     weatherSummary: WeatherSummary,

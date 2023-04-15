@@ -3,7 +3,7 @@ package com.yinkaolu.rbcweatherapp.data.api.model
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import org.junit.Test
 import java.io.BufferedReader
@@ -31,9 +31,9 @@ class DataModelTest {
     @Test
     fun forcast_conversion() {
         val forcastReportString = readJSON("sample_forcast")
-        val parsedForcastReport = gson.fromJson(forcastReportString, ForcastReport::class.java)
+        val parsedForecastReport = gson.fromJson(forcastReportString, ForecastReport::class.java)
 
-        parsedForcastReport.apply {
+        parsedForecastReport.apply {
             assert(true)
         }
     }

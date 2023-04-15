@@ -7,6 +7,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
+/**
+ * Hilt Module to provide the necessary Data components
+ */
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class DataModule {

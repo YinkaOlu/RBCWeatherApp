@@ -7,9 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.yinkaolu.rbcweatherapp.R
-import com.yinkaolu.rbcweatherapp.ui.composable.LocationEntry
+import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationEntry
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
 
+/**
+ * UI component that renders the error screen
+ */
 @Composable
 fun ErrorScreen(
     errorMessage: String?,

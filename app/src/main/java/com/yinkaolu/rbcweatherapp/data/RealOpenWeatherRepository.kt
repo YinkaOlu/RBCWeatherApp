@@ -4,21 +4,21 @@ import android.accounts.NetworkErrorException
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherService
 import com.yinkaolu.rbcweatherapp.data.api.OpenWeatherResponse
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import javax.inject.Inject
 
 class RealOpenWeatherRepository @Inject constructor(
     val openWeatherService: OpenWeatherService
 ) : OpenWeatherRepository {
-    override suspend fun loadForcastReport(latitude: String, longitude: String): ForcastReport {
+    override suspend fun loadForcastReport(latitude: String, longitude: String): ForecastReport {
         val loadCurrentWeatherReportResponse = openWeatherService.retrieveForcast(
             latitude = latitude,
             longitude = longitude
         )
 
         return when(loadCurrentWeatherReportResponse) {
-            is OpenWeatherResponse.Success<ForcastReport> -> {
+            is OpenWeatherResponse.Success<ForecastReport> -> {
                 loadCurrentWeatherReportResponse.details
             }
             is OpenWeatherResponse.Error -> {

@@ -1,12 +1,11 @@
 package com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate
 
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.ForcastSummary
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.ForecastSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 
 /**
- * Represents the states of the presented UI based on state of ViewModel
- * and date available
+ * Represents the state of the presented UI to user
  */
 sealed interface WeatherReportUiState {
 
@@ -23,7 +22,7 @@ sealed interface WeatherReportUiState {
 
     data class ForcastDetailPage(
         val locationSummary: LocationSummary?,
-        val forcastSummary: ForcastSummary
+        val forecastSummary: ForecastSummary
     ) : WeatherReportUiState
 
     object Loading: WeatherReportUiState

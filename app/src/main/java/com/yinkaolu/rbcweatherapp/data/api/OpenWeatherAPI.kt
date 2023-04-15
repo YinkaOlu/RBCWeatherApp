@@ -1,7 +1,7 @@
 package com.yinkaolu.rbcweatherapp.data.api
 
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocationList
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ interface OpenWeatherAPI {
         @Query("lat") latitude: String,
         @Query("lon") longitude: String,
         @Query("appid") apiKey: String
-    ): Call<ForcastReport>
+    ): Call<ForecastReport>
 
     @GET("data/2.5/weather")
     fun getWeatherDetails(

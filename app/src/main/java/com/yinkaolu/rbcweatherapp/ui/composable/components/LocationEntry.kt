@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.ui.composable
+package com.yinkaolu.rbcweatherapp.ui.composable.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
 
+/**
+ * UI component that renders the location search component
+ */
 @Composable
 fun LocationEntry(
     onSearchLocation: (location: LocationInfo) -> Unit

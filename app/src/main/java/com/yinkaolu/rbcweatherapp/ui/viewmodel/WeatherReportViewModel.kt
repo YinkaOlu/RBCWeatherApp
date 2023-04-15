@@ -1,16 +1,12 @@
 package com.yinkaolu.rbcweatherapp.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yinkaolu.rbcweatherapp.data.OpenWeatherRepository
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.Forcast
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForcastReport
-import com.yinkaolu.rbcweatherapp.data.api.model.weather.Weather
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
-import com.yinkaolu.rbcweatherapp.ui.composable.screen.ErrorScreen
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.*
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate.WeatherReportUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +20,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Main ViewModel that controls the state and display of the Weather report screens
+ */
 @HiltViewModel
 class WeatherReportViewModel @Inject constructor(
     val openWeatherRepository: OpenWeatherRepository
@@ -140,7 +139,7 @@ class WeatherReportViewModel @Inject constructor(
                     )
                     _weatherReportUiState.emit(
                         WeatherReportUiState.ForcastDetailPage(
-                            forcastSummary = forcastReport.toForcastSummary(),
+                            forecastSummary = forcastReport.toForcastSummary(),
                             locationSummary = it.toLocationSummary()
                         )
                     )
@@ -172,7 +171,7 @@ class WeatherReportViewModel @Inject constructor(
         }.orEmpty()
     )
 
-    private fun ForcastReport.toForcastSummary() = ForcastSummary(
+    private fun ForecastReport.toForcastSummary() = ForecastSummary(
         weatherSummaries = list.map { forecast ->
             WeatherSummary(
                 icon = forecast.weather.firstOrNull()?.icon.orEmpty(),

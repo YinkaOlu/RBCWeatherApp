@@ -1,4 +1,4 @@
-package com.yinkaolu.rbcweatherapp.ui.composable
+package com.yinkaolu.rbcweatherapp.ui.composable.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
 
+/**
+ * Component that renders the location details in main/detail page
+ */
 @Composable
 fun LocationSummarySection(
     locationSummary: LocationSummary

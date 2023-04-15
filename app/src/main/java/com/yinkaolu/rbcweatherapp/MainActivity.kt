@@ -11,9 +11,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -22,7 +20,7 @@ import com.yinkaolu.rbcweatherapp.ui.theme.RBCWeatherAppTheme
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.WeatherReportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.yinkaolu.rbcweatherapp.ui.WeatherReportScreen
+import com.yinkaolu.rbcweatherapp.ui.composable.WeatherReportScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

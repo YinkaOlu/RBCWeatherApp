@@ -2,6 +2,9 @@ package com.yinkaolu.rbcweatherapp.data.api.model.weather
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * API model representing the main weather data points for a location
+ */
 data class MainWeather(
     @SerializedName("temp")
     val temperature: Double? = null,

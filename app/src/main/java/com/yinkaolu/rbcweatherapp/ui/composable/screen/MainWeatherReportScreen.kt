@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.yinkaolu.rbcweatherapp.R
-import com.yinkaolu.rbcweatherapp.ui.composable.LocationEntry
-import com.yinkaolu.rbcweatherapp.ui.composable.LocationSummarySection
-import com.yinkaolu.rbcweatherapp.ui.composable.WeatherSummarySection
+import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationEntry
+import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationSummarySection
+import com.yinkaolu.rbcweatherapp.ui.composable.components.WeatherSummarySection
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
