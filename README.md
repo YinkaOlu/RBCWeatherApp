@@ -33,3 +33,46 @@ logic, determines the specifics of how data should be displayed (ie, colors, ori
 When the user interacts with the UI, the UI layer relays those events to the ViewModel, where 
 depending on the business logic, a reaction occurs. Most of this logic can be found in the 
 MainActivity and the sub Composables representing different portions of the UI.
+
+
+## Screens
+
+### Initial Opening
+
+On initial open, location permissions is requested to determine current weather at users location.
+
+
+https://user-images.githubusercontent.com/10109904/232233093-09737f68-85a1-41ae-9dd8-72cd73d00da8.mov
+
+
+
+### Enable Location Permission + Load Weather for current location
+
+
+After location permission is provided, weather of current location is retrieved from OpenWeather.
+
+
+https://user-images.githubusercontent.com/10109904/232233150-4e08664d-769a-4cd4-b8bc-2bc67f6d489c.mov
+
+### Location Search
+
+On the main page, the user can search for the current weather for the entered location.
+
+
+https://user-images.githubusercontent.com/10109904/232233252-fcfd509b-15c5-41fa-9274-365ec7afc043.mov
+
+
+### Weather Forcast
+
+If the user clicks on the current weather, they are taken to a detail page displaying more weather information for future times.
+
+
+https://user-images.githubusercontent.com/10109904/232233292-dc374150-adde-4461-8363-712316a98310.mov
+
+
+
+
+
+
+
+
