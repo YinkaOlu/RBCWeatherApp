@@ -13,7 +13,7 @@ Domain/Business-logic layer & UI.
 The data layer contains models that represent the raw weather information received from OpenWeather 
 and the operations that can be done to interact with this data (for this app, mainly just fetching). 
 Data flow in this architecture is unidirectional, flowing from the source (OpenWeather API) 
-eventually to the UI where it will be displayed for the user to interaction with. Access to the data 
+eventually to the UI where it will be displayed for the user to interact with. Access to the data 
 layer is controlled by a Repository (WeatherReportRepository). 
 
 ### Domain / Business Logic layer
