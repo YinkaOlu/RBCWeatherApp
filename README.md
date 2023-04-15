@@ -1,4 +1,4 @@
-# RBC Weather App
+# Weather App
 
 The following project is an Android application that fetches and displays weather information from
 OpenWeather API (https://openweathermap.org/). 
