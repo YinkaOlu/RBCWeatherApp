@@ -39,7 +39,7 @@ MainActivity and the sub Composables representing different portions of the UI.
 
 ### Initial Opening
 
-On initial open, location permissions is requested to determine current weather at users location.
+On initial open, location permissions are requested to determine current weather at users location.
 
 
 https://user-images.githubusercontent.com/10109904/232233093-09737f68-85a1-41ae-9dd8-72cd73d00da8.mov
