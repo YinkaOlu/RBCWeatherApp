@@ -23,13 +23,13 @@ import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 @Composable
 fun WeatherSummarySection(
     weatherSummary: WeatherSummary,
-    onClick: () -> Unit
+    onSeeFullForcast: () -> Unit
 ) {
     Card(
         backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
+            .clickable { onSeeFullForcast() }
     ) {
         Column(
             modifier = Modifier
@@ -39,12 +39,16 @@ fun WeatherSummarySection(
         ) {
             AsyncImage(
                 modifier = Modifier.fillMaxWidth(),
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillWidth,
                 model = "https://openweathermap.org/img/wn/${weatherSummary.icon}@2x.png",
                 contentDescription = stringResource(R.string.weather_icon_description)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = onSeeFullForcast) {
+                Text(text = stringResource(R.string.see_forecast))
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 modifier = Modifier.fillMaxWidth(),
@@ -74,6 +78,7 @@ fun WeatherSummarySection(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
+                modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Start,
                 text = weatherSummary.weatherDescription,
                 fontSize = MaterialTheme.typography.body1.fontSize,

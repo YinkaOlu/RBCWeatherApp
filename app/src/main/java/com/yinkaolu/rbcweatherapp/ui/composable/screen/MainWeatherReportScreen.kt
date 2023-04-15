@@ -73,14 +73,8 @@ fun MainWeatherReportScreen(
         item {
             WeatherSummarySection(
                 weatherSummary = weatherSummary,
-                onClick = onViewMore
+                onSeeFullForcast = onViewMore
             )
-        }
-
-        item {
-            Button(onClick = onViewMore) {
-                Text(text = stringResource(R.string.see_forecast))
-            }
         }
 
 

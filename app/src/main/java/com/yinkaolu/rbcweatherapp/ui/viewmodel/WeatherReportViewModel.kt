@@ -113,7 +113,7 @@ class WeatherReportViewModel @Inject constructor(
                             locationSummary = it.toLocationSummary()
                         )
                     )
-                }
+                } ?: _weatherReportUiState.emit(WeatherReportUiState.Error("Location not found."))
             } catch (e: java.lang.Exception) {
                 _weatherReportUiState.emit(
                     WeatherReportUiState.Error(
@@ -163,7 +163,7 @@ class WeatherReportViewModel @Inject constructor(
 
     private fun WeatherReport.toWeatherSummary() = WeatherSummary(
         icon = weather.firstOrNull()?.icon ?: "",
-        weatherDescription = toDisplayDescription(),
+        weatherDescription = toQuickDescription(),
         temperature = convertKelvinToCelsius(mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
         dateString = this.atTime?.let {
             val date = Date(it.toLong() * 1000)
@@ -175,7 +175,7 @@ class WeatherReportViewModel @Inject constructor(
         weatherSummaries = list.map { forecast ->
             WeatherSummary(
                 icon = forecast.weather.firstOrNull()?.icon.orEmpty(),
-                weatherDescription = forecast.toDisplayDescription(),
+                weatherDescription = forecast.toFullDescription(),
                 temperature = convertKelvinToCelsius(forecast.mainWeather?.temperature)?.toCelsiusString() ?: "unknown",
                 dateString = forecast.time?.let {
                     val date = Date(it.toLong() * 1000)
@@ -192,7 +192,7 @@ class WeatherReportViewModel @Inject constructor(
 
     private fun Double.toCelsiusString(): String = "$this°C"
 
-    private fun Forcast.toDisplayDescription(): String {
+    private fun Forcast.toFullDescription(): String {
         var report = "- "
         report += weather
             .map { it.description }.joinToString ("\n" )
@@ -209,7 +209,7 @@ class WeatherReportViewModel @Inject constructor(
             report += "- Cloud Coverage: ${it.coverage}% \n\n"
         }
 
-        report += "- Precipitation: ${precipitationProbability}%\n\n"
+        report += "- Precipitation: ${precipitationProbability?.times(100)}%\n\n"
         rainReport?.let {
             report += "- Rain over last Hr: ${it.rainOverLastHour} m\n\n"
             report += "- Rain over last 3 Hrs: ${it.rainOverLastThreeHour} m\n\n"
@@ -228,36 +228,16 @@ class WeatherReportViewModel @Inject constructor(
         return report
     }
 
-    private fun WeatherReport.toDisplayDescription(): String {
+    private fun WeatherReport.toQuickDescription(): String {
         var report = "- "
         report += weather
-            .map { it.description }.joinToString ("\n" )
+            .map { it.description }.joinToString (" / " )
 
         report += "\n\n"
 
         mainWeather?.let {
             report += "- Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
             report += "- Humidity: ${it.humidity}%\n\n"
-        }
-
-        report += "- Cloud Visibility: ${visibility}\n\n"
-        cloudReport?.let {
-            report += "- Cloud Coverage: ${it.coverage}%\n\n"
-        }
-
-        rainReport?.let {
-            report += "- Rain over last Hr: ${it.rainOverLastHour}\n\n"
-            report += "- Rain over last 3 Hrs: ${it.rainOverLastThreeHour}\n\n"
-        }
-
-        snowReport?.let {
-            report += "- Snow over last Hr: ${it.snowOverLastHour}\n\n"
-            report += "- Snow over last 3 Hrs: ${it.snowOverLastThreeHour}\n\n"
-        }
-
-        windReport?.let {
-            report += "- Wind Speed: ${it.windSpeed} m/s \n\n"
-            report += "- Wind Direction: ${it.windDirectionDegree}°\n\n"
         }
 
         return report

@@ -14,7 +14,7 @@
     <string name="location_permission_rationale">Location permissions are necessary to determine the weather at your exact location.</string>
     <string name="request_location_permission">Request location permission</string>
     <string name="close_content_description">Close Detail Page</string>
-    <string name="see_forecast">See Forecast</string>
+    <string name="see_forecast">See Full Forecast Details</string>
     <string name="weather_observation">What to expect:</string>
     <string name="weather_observation_now">What to expect now:</string>
 </resources>
