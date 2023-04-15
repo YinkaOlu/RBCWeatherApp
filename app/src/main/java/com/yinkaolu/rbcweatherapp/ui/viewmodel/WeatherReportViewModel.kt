@@ -28,7 +28,7 @@ class WeatherReportViewModel @Inject constructor(
     val openWeatherRepository: OpenWeatherRepository
 ): ViewModel() {
     private val mainDateFormater = SimpleDateFormat("EEEE, MMM dd")
-    private val forcastDateFormater = SimpleDateFormat("EE, MMM dd (HH:mm)")
+    private val forcastDateFormater = SimpleDateFormat("MMM dd (HH:mm)")
     private val _weatherReportUiState: MutableStateFlow<WeatherReportUiState> = MutableStateFlow(
         WeatherReportUiState.RequestLocationPermission
     )
@@ -139,7 +139,7 @@ class WeatherReportViewModel @Inject constructor(
                     )
                     _weatherReportUiState.emit(
                         WeatherReportUiState.ForcastDetailPage(
-                            forecastSummary = forcastReport.toForcastSummary(),
+                            forecastSummary = forcastReport.toForecastSummary(),
                             locationSummary = it.toLocationSummary()
                         )
                     )
@@ -171,7 +171,7 @@ class WeatherReportViewModel @Inject constructor(
         }.orEmpty()
     )
 
-    private fun ForecastReport.toForcastSummary() = ForecastSummary(
+    private fun ForecastReport.toForecastSummary() = ForecastSummary(
         weatherSummaries = list.map { forecast ->
             WeatherSummary(
                 icon = forecast.weather.firstOrNull()?.icon.orEmpty(),
@@ -193,71 +193,71 @@ class WeatherReportViewModel @Inject constructor(
     private fun Double.toCelsiusString(): String = "$this°C"
 
     private fun Forcast.toDisplayDescription(): String {
-        var report = "* "
+        var report = "- "
         report += weather
             .map { it.description }.joinToString ("\n" )
 
         report += "\n\n"
 
         mainWeather?.let {
-            report += "* Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
-            report += "* Humidity: ${it.humidity}%\n\n"
+            report += "- Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
+            report += "- Humidity: ${it.humidity}%\n\n"
         }
 
-        report += "* Cloud Visibility: ${visibility}\n\n"
+        report += "- Cloud Visibility: ${visibility}\n\n"
         cloudReport?.let {
-            report += "* Cloud Coverage: ${it.coverage}% \n\n"
+            report += "- Cloud Coverage: ${it.coverage}% \n\n"
         }
 
-        report += "* Precipitation: ${precipitationProbability}%\n\n"
+        report += "- Precipitation: ${precipitationProbability}%\n\n"
         rainReport?.let {
-            report += "* Rain over an Hour: ${it.rainOverLastHour} m\n\n"
-            report += "* Rain over 3 Hours: ${it.rainOverLastThreeHour} m\n\n"
+            report += "- Rain over last Hr: ${it.rainOverLastHour} m\n\n"
+            report += "- Rain over last 3 Hrs: ${it.rainOverLastThreeHour} m\n\n"
         }
 
         snowReport?.let {
-            report += "* Snow over an Hour: ${it.snowOverLastHour}\n\n"
-            report += "* Snow over 3 Hours: ${it.snowOverLastThreeHour}\n\n"
+            report += "- Snow over last Hr: ${it.snowOverLastHour}\n\n"
+            report += "- Snow over last 3 Hrs: ${it.snowOverLastThreeHour}\n\n"
         }
 
         windReport?.let {
-            report += "* Wind Speed: ${it.windSpeed} m/s \n\n"
-            report += "* Wind Direction: ${it.windDirectionDegree}°\n\n"
+            report += "- Wind Speed: ${it.windSpeed} m/s \n\n"
+            report += "- Wind Direction: ${it.windDirectionDegree}°\n\n"
         }
 
         return report
     }
 
     private fun WeatherReport.toDisplayDescription(): String {
-        var report = "* "
+        var report = "- "
         report += weather
             .map { it.description }.joinToString ("\n" )
 
         report += "\n\n"
 
         mainWeather?.let {
-            report += "* Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
-            report += "* Humidity: ${it.humidity}%\n\n"
+            report += "- Feels like: ${convertKelvinToCelsius(it.feelsLikeTemperature)?.toCelsiusString()}\n\n"
+            report += "- Humidity: ${it.humidity}%\n\n"
         }
 
-        report += "* Cloud Visibility: ${visibility}\n\n"
+        report += "- Cloud Visibility: ${visibility}\n\n"
         cloudReport?.let {
-            report += "* Cloud Coverage: ${it.coverage}%\n\n"
+            report += "- Cloud Coverage: ${it.coverage}%\n\n"
         }
 
         rainReport?.let {
-            report += "* Rain over an Hour: ${it.rainOverLastHour}\n\n"
-            report += "* Rain over 3 Hours: ${it.rainOverLastThreeHour}\n\n"
+            report += "- Rain over last Hr: ${it.rainOverLastHour}\n\n"
+            report += "- Rain over last 3 Hrs: ${it.rainOverLastThreeHour}\n\n"
         }
 
         snowReport?.let {
-            report += "* Snow over an Hour: ${it.snowOverLastHour}\n\n"
-            report += "* Snow over 3 Hours: ${it.snowOverLastThreeHour}\n\n"
+            report += "- Snow over last Hr: ${it.snowOverLastHour}\n\n"
+            report += "- Snow over last 3 Hrs: ${it.snowOverLastThreeHour}\n\n"
         }
 
         windReport?.let {
-            report += "* Wind Speed: ${it.windSpeed} m/s \n\n"
-            report += "* Wind Direction: ${it.windDirectionDegree}°\n\n"
+            report += "- Wind Speed: ${it.windSpeed} m/s \n\n"
+            report += "- Wind Direction: ${it.windDirectionDegree}°\n\n"
         }
 
         return report

@@ -1,9 +1,7 @@
 package com.yinkaolu.rbcweatherapp.ui.composable.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -28,6 +26,7 @@ fun WeatherSummarySection(
     onClick: () -> Unit
 ) {
     Card(
+        backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() }
@@ -45,6 +44,8 @@ fun WeatherSummarySection(
                 contentDescription = stringResource(R.string.weather_icon_description)
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
@@ -53,17 +54,32 @@ fun WeatherSummarySection(
                 fontStyle = MaterialTheme.typography.h5.fontStyle,
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = weatherSummary.temperature,
                 fontSize = MaterialTheme.typography.h4.fontSize,
                 fontStyle = MaterialTheme.typography.h4.fontStyle,
             )
 
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(R.string.weather_observation_now),
+                fontSize = MaterialTheme.typography.h6.fontSize,
+                fontStyle = MaterialTheme.typography.h6.fontStyle,
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                textAlign = TextAlign.Start,
                 text = weatherSummary.weatherDescription,
                 fontSize = MaterialTheme.typography.body1.fontSize,
                 fontStyle = MaterialTheme.typography.body1.fontStyle,
             )
+
         }
     }
 }

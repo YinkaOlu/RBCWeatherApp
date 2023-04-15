@@ -77,6 +77,12 @@ fun MainWeatherReportScreen(
             )
         }
 
+        item {
+            Button(onClick = onViewMore) {
+                Text(text = stringResource(R.string.see_forecast))
+            }
+        }
+
 
     }
 }

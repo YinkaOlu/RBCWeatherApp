@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                         RBCWeatherAppTheme {
                             Surface(
                                 modifier = Modifier.fillMaxSize(),
-                                color = MaterialTheme.colors.primary
+                                color = MaterialTheme.colors.primaryVariant
                             ) {
                                 WeatherReportScreen(
                                     state = state,

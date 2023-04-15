@@ -1,5 +1,6 @@
 package com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate
 
+import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.ForecastSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
