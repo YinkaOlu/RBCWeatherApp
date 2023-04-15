@@ -11,14 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.yinkaolu.rbcweatherapp.R
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 
 /**
  * UI component that renders the location search component
  */
 @Composable
 fun LocationEntry(
-    onSearchLocation: (location: LocationInfo) -> Unit
+    onSearchLocation: (location: UserLocationSearchInput) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -60,7 +60,7 @@ fun LocationEntry(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
             onSearchLocation(
-                LocationInfo(
+                UserLocationSearchInput(
                     cityName = cityText,
                     state = stateText,
                     country = countryText

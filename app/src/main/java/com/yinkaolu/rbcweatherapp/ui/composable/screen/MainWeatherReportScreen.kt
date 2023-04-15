@@ -17,7 +17,7 @@ import com.yinkaolu.rbcweatherapp.R
 import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationEntry
 import com.yinkaolu.rbcweatherapp.ui.composable.components.LocationSummarySection
 import com.yinkaolu.rbcweatherapp.ui.composable.components.WeatherSummarySection
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationSummary
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 
@@ -25,7 +25,7 @@ import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.WeatherSummary
 fun MainWeatherReportScreen(
     weatherSummary: WeatherSummary,
     locationSummary: LocationSummary?,
-    onSearchLocation: (locationInfo: LocationInfo) -> Unit,
+    onSearchLocation: (userLocationSearchInput: UserLocationSearchInput) -> Unit,
     onViewMore: () -> Unit
 ) {
     var hideSearch by remember { mutableStateOf(true) }

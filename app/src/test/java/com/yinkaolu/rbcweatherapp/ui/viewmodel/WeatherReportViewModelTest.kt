@@ -4,6 +4,7 @@ import com.yinkaolu.rbcweatherapp.data.OpenWeatherRepository
 import com.yinkaolu.rbcweatherapp.data.api.model.geo.GeoLocation
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.ForecastReport
 import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
+import com.yinkaolu.rbcweatherapp.domain.*
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate.WeatherReportUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,16 +44,20 @@ class WeatherReportViewModelTest {
     @Before
     fun setup() {
         weatherReportViewModel = WeatherReportViewModel(
-            openWeatherRepository = openWeatherRepository
+            loadGeoLocationUseCase = LoadGeoLocationUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
+            loadForecastReportUseCase = LoadForecastReportUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
+            loadGeoLocationByCoordinatesUseCase = LoadGeoLocationByCoordinatesUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
+            loadWeatherReportUseCase = LoadWeatherReportUseCase(UnconfinedTestDispatcher(), openWeatherRepository),
+            loadWeatherReportByCoordinatesUseCase = LoadWeatherReportByCoordinatesUseCase(UnconfinedTestDispatcher(), openWeatherRepository)
         )
     }
 
     @Test
-    fun `On initial load, do not load location weather data without location permission`() =
+    fun `On initial load, do not load location weather data if location permission not granted`() =
         runTest {
-            val state = weatherReportViewModel.weatherReportUiState
+            assert(weatherReportViewModel.weatherReportUiState.value == WeatherReportUiState.RequestCurrentLocation)
 
-            assert(state.value == WeatherReportUiState.RequestLocationPermission)
+            weatherReportViewModel.setLocationPermissionState(false)
 
             weatherReportViewModel.loadWeatherReport()
 
@@ -68,7 +73,7 @@ class WeatherReportViewModelTest {
     fun `When local coordinates set, update UI state to Main Page`() = runTest {
         assert(
             weatherReportViewModel.weatherReportUiState.value
-                    is WeatherReportUiState.RequestLocationPermission
+                    is WeatherReportUiState.RequestCurrentLocation
         )
 
         `when`(openWeatherRepository.loadCurrentWeatherReport(anyString(), anyString())).thenReturn(
@@ -101,7 +106,7 @@ class WeatherReportViewModelTest {
     fun `On network error, update UI state to Error`() = runTest {
         assert(
             weatherReportViewModel.weatherReportUiState.value
-                    is WeatherReportUiState.RequestLocationPermission
+                    is WeatherReportUiState.RequestCurrentLocation
         )
 
         `when`(openWeatherRepository.loadCurrentWeatherReport(anyString(), anyString()))
@@ -149,7 +154,7 @@ class WeatherReportViewModelTest {
 
         assert(
             weatherReportViewModel.weatherReportUiState.value
-                    is WeatherReportUiState.ForcastDetailPage
+                    is WeatherReportUiState.ForecastDetailPage
         )
     }
 }

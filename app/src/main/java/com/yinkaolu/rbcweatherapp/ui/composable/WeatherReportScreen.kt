@@ -11,14 +11,14 @@ import com.yinkaolu.rbcweatherapp.ui.composable.screen.ErrorScreen
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.ForecastDetailScreen
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.LoadingScreen
 import com.yinkaolu.rbcweatherapp.ui.composable.screen.MainWeatherReportScreen
-import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.LocationInfo
+import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.UserLocationSearchInput
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate.WeatherReportUiState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun WeatherReportScreen(
     state: WeatherReportUiState,
-    onSearchLocation: (locationInfo: LocationInfo) -> Unit,
+    onSearchLocation: (userLocationSearchInput: UserLocationSearchInput) -> Unit,
     onPresentForecastDetails: () -> Unit,
     onReturnToMain: () -> Unit,
     onLocationPermissionGranted: (Boolean) -> Unit
@@ -30,17 +30,17 @@ fun WeatherReportScreen(
         )
         WeatherReportUiState.Loading -> LoadingScreen()
         is WeatherReportUiState.MainWeatherPage -> MainWeatherReportScreen(
-            weatherSummary = state.weatherSummary,
-            locationSummary = state.locationSummary,
+            weatherSummary = state.summarizedWeatherReport.weatherSummary,
+            locationSummary = state.summarizedWeatherReport.locationSummary,
             onSearchLocation = onSearchLocation,
             onViewMore = onPresentForecastDetails
         )
-        is WeatherReportUiState.ForcastDetailPage -> ForecastDetailScreen(
-            forecastSummary = state.forecastSummary,
-            locationSummary = state.locationSummary,
+        is WeatherReportUiState.ForecastDetailPage -> ForecastDetailScreen(
+            forecastSummary = state.summarizedForecast.forecastSummary,
+            locationSummary = state.summarizedForecast.locationSummary,
             onBack = onReturnToMain
         )
-        WeatherReportUiState.RequestLocationPermission -> {
+        WeatherReportUiState.RequestCurrentLocation -> {
             val locationPermissionState = rememberMultiplePermissionsState(
                 listOf(
                     android.Manifest.permission.ACCESS_COARSE_LOCATION,
