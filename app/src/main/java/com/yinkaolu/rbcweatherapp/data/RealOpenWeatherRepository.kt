@@ -11,7 +11,7 @@ import javax.inject.Inject
 class RealOpenWeatherRepository @Inject constructor(
     val openWeatherService: OpenWeatherService
 ) : OpenWeatherRepository {
-    override suspend fun loadForcastReport(latitude: String, longitude: String): ForecastReport {
+    override suspend fun loadForecastReport(latitude: String, longitude: String): ForecastReport {
         val loadCurrentWeatherReportResponse = openWeatherService.retrieveForcast(
             latitude = latitude,
             longitude = longitude

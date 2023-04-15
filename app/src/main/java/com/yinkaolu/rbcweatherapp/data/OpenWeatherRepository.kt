@@ -6,7 +6,7 @@ import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 
 interface OpenWeatherRepository {
     @Throws(Exception::class)
-    suspend fun loadForcastReport(
+    suspend fun loadForecastReport(
         latitude: String,
         longitude: String
     ) : ForecastReport

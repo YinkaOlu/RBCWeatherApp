@@ -15,7 +15,7 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class DataModule {
     @Binds
     abstract fun bindOpenWeatherRepository(
-        analyticsServiceImpl: RealOpenWeatherRepository
+        realOpenWeatherRepository: RealOpenWeatherRepository
     ): OpenWeatherRepository
 
     @Binds

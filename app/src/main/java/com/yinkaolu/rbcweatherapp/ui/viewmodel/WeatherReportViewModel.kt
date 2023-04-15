@@ -10,7 +10,6 @@ import com.yinkaolu.rbcweatherapp.data.api.model.weather.WeatherReport
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.model.*
 import com.yinkaolu.rbcweatherapp.ui.viewmodel.uistate.WeatherReportUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -49,7 +48,7 @@ class WeatherReportViewModel @Inject constructor(
         lat: Double,
         lon: Double,
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val weatherReport = openWeatherRepository.loadCurrentWeatherReport(
                     longitude = "$lon",
@@ -81,7 +80,7 @@ class WeatherReportViewModel @Inject constructor(
     fun setLocationPermissionState(
         isLocationPermissionGranted: Boolean
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             if (!isLocationPermissionGranted) {
                 _weatherReportUiState.emit(WeatherReportUiState.RequestLocationPermission)
             }
@@ -92,7 +91,7 @@ class WeatherReportViewModel @Inject constructor(
         if (_weatherReportUiState.value == WeatherReportUiState.RequestLocationPermission) {
             return
         }
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val geoLocation = openWeatherRepository.findLocation(
                     city = info?.cityName ?: lastGeoLocation?.name.orEmpty(),
@@ -124,7 +123,7 @@ class WeatherReportViewModel @Inject constructor(
     }
 
     fun loadForcastReport() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
                 val geoLocation = openWeatherRepository.findLocation(
                     city = lastGeoLocation?.name.orEmpty(),
@@ -133,13 +132,13 @@ class WeatherReportViewModel @Inject constructor(
                 ).firstOrNull()
 
                 geoLocation?.let {
-                    val forcastReport = openWeatherRepository.loadForcastReport(
+                    val forecastReport = openWeatherRepository.loadForecastReport(
                         longitude = "${it.longitude}",
                         latitude = "${it.latitude}"
                     )
                     _weatherReportUiState.emit(
                         WeatherReportUiState.ForcastDetailPage(
-                            forecastSummary = forcastReport.toForecastSummary(),
+                            forecastSummary = forecastReport.toForecastSummary(),
                             locationSummary = it.toLocationSummary()
                         )
                     )
